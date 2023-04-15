@@ -1,8 +1,13 @@
-function App() {
-  return (
-    <div >
+import {Application} from "pixi.js";
+import {useEffect, useState} from "react";
+import PixelCanvas from "./PixelCanvas";
 
-    </div>
+function App() {
+
+  return (
+    < >
+      <PixelCanvas />
+    </>
   );
 }
 
