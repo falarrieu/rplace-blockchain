@@ -1,8 +1,18 @@
-function App() {
-  return (
-    <div >
+import {useState} from "react";
+import LoadingBar from "./canvas/LoadingBar";
+import PixelCanvas from "./canvas/PixelCanvas";
+import TopBar from "./topbar/TopBar";
 
-    </div>
+function App() {
+
+  const [loading, setLoading] = useState(true);
+
+  return (
+    < >
+      <TopBar />
+      {loading ? <LoadingBar /> : <></>}
+      <PixelCanvas setLoading={setLoading}/>
+    </>
   );
 }
 
