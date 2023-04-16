@@ -1,12 +1,18 @@
 import React, {useState} from 'react';
 import DeckGL from '@deck.gl/react';
 import {SolidPolygonLayer} from '@deck.gl/layers';
-import useViews from "./hooks/useViews";
-import useData from "./hooks/useData";
-function PixelCanvas() {
+import useViews from "../hooks/useViews";
+import useData from "../hooks/useData";
+
+/**
+ * Component that encapsulated the rendering of the canvas.
+ * @param  {Callback} setLoading Sets the loading state.
+ * @return {DeckGL}      The DeckGL rendering component
+ */
+function PixelCanvas({setLoading}) {
 
     const viewContext = useViews();
-    const dataContext = useData();
+    const dataContext = useData(setLoading);
 
     const [viewState, setViewState] = useState({target: [5000, 5000], zoom: -3.5})
 
@@ -18,7 +24,7 @@ function PixelCanvas() {
         pickable: true,
         autoHighlight: true,
         highlightColor: d => [250,250,250, 150],
-        // extruded: false,
+        // extruded: true,  To be implemented with the 3D viewer (GPU Heavy)
         // getElevation: d => d.numPurchases
     })
 
