@@ -35,21 +35,21 @@ export default function TopBarTabs({expanded, tabsContext}){
             <Tab 
                 value={"Canvas"}
                 label={expanded ? "Canvas" : ""} 
-				style={{ color: "rgb(255 106 0)" }}
+		style={{ color: "rgb(255 106 0)" }}
                 icon={<PaletteIcon style={{ color: "rgb(90 90 90)" }}/>} 
                 iconPosition="start" 
             />
             <Tab 
                 value={"About"}
                 label={expanded ? "About" : ""} 
-				style={{ color: "rgb(255 106 0)" }}
+		style={{ color: "rgb(255 106 0)" }}
                 icon={<InfoIcon style={{ color: "rgb(90 90 90)" }}/>} 
                 iconPosition="start" 
             />
 			<Tab 
                 value={"Wallet"}
                 label={expanded ? "Wallet" : ""} 
-				style={{ color: "rgb(255 106 0)" }}
+		style={{ color: "rgb(255 106 0)" }}
                 icon={<WalletIcon style={{ color: "rgb(90 90 90)" }}/>} 
                 iconPosition="start" 
             />
