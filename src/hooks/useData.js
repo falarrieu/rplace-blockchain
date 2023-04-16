@@ -15,7 +15,7 @@ export default function useData(setLoading) {
 
     useEffect( () => {
         // This will be replaced with the fetch the array on the smart contract
-        generateFakeData().then(response => setFakeData(response))
+        // generateFakeData().then(response => setFakeData(response))
     }, []);
 
     useEffect( () => {

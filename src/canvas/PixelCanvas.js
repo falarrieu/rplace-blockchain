@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import DeckGL from '@deck.gl/react';
 import {SolidPolygonLayer} from '@deck.gl/layers';
 import useViews from "../hooks/useViews";
@@ -15,6 +15,10 @@ function PixelCanvas({setLoading}) {
     const dataContext = useData(setLoading);
 
     const [viewState, setViewState] = useState({target: [5000, 5000], zoom: -3.5})
+
+    useEffect(() => {
+        setLoading(true);
+    }, [])
 
     const pixelLayer = new SolidPolygonLayer({
         id:"pixelLayer",
