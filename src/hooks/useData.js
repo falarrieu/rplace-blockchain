@@ -1,7 +1,12 @@
 import {useEffect, useState} from "react";
 
 
-export default function useData() {
+/**
+ * Use data hook encapsulates logic for data retrieval, proccessing and relevant 
+ * states needed for the UI.
+ * @param  {Callback} setLoading Sets state of loading component
+ */
+export default function useData(setLoading) {
 
     const [data, setData] = useState([])
     const [fakeData, setFakeData] = useState([])
@@ -15,6 +20,7 @@ export default function useData() {
 
     useEffect( () => {
         transformData(hookContext, fakeData);
+        setLoading(false);
     }, [fakeData]);
 
     return {
@@ -22,8 +28,15 @@ export default function useData() {
     };
 }
 
-function transformData(hookContext, testData) {
-    const flatArray = testData.flat()
+
+/**
+ * This function transform 2D index of the pixel into polygon geometry. After,
+ * transforming it sets the data state in the hook.
+ * @param  {Object} hookContext Context to useData hook
+ * @param  {2D Array} pixelData Pixels with relevant data
+ */
+function transformData(hookContext, pixelData) {
+    const flatArray = pixelData.flat()
     const transformed = flatArray.map((pixel) => {
         const bottomLeft = [pixel.index[0] * 10, pixel.index[1] * 10]
         const topLeft = [pixel.index[0] * 10,( pixel.index[1] + 1) * 10]
@@ -31,6 +44,7 @@ function transformData(hookContext, testData) {
         const bottomRight = [( pixel.index[0] + 1) * 10, pixel.index[1] * 10]
         return {
             polygon: [bottomLeft, topLeft, topRight, bottomRight, bottomLeft],
+            index: pixel.index,
             color: pixel.color,
             numPurchases: pixel.numPurchases
         }
@@ -51,7 +65,6 @@ async function generateFakeData(){
                     Math.floor(Math.random() * 255),
                     Math.floor(Math.random() * 255)],
                 numPurchases: Math.floor(Math.random() * (x + y))
-                //Other Data ?
             }
         })
     })
