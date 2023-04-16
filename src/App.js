@@ -1,12 +1,17 @@
-import {Application} from "pixi.js";
-import {useEffect, useState} from "react";
-import PixelCanvas from "./PixelCanvas";
+import {useState} from "react";
+import LoadingBar from "./canvas/LoadingBar";
+import PixelCanvas from "./canvas/PixelCanvas";
+import TopBar from "./topbar/TopBar";
 
 function App() {
 
+  const [loading, setLoading] = useState(true);
+
   return (
     < >
-      <PixelCanvas />
+      <TopBar />
+      {loading ? <LoadingBar /> : <></>}
+      <PixelCanvas setLoading={setLoading}/>
     </>
   );
 }
