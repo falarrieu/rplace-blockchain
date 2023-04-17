@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+// npm install @openzeppelin/contracts
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Ethrplace is ERC721, Ownable {
+contract EthrPlace is ERC721, Ownable {
     struct Pixel {
         uint16 x;
         uint16 y;
@@ -22,7 +23,7 @@ contract Ethrplace is ERC721, Ownable {
     event PixelPlaced(uint16 indexed x, uint16 indexed y, uint24 color, address indexed owner);
     event ReferralSet(address indexed user, address indexed referrer);
 
-    constructor() ERC721("Ethrplace", "EP") {}
+    constructor() ERC721("EthrPlace", "EP") {}
 
     function setReferrer(address referrer) external {
         require(referrer != msg.sender, "Cannot refer yourself");
