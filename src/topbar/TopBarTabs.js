@@ -47,7 +47,9 @@ export default function TopBarTabs({expanded, tabsContext}){
                 label={expanded ? "About" : ""} 
 		style={{ color: "rgb(255 106 0)" }}
                 icon={<InfoIcon style={{ color: "rgb(90 90 90)" }}/>} 
-                iconPosition="start" 
+                iconPosition="start"
+				component={Link}
+				to={"/About"}
             />
 			<Tab 
                 value={"Wallet"}
