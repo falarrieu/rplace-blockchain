@@ -1,10 +1,5 @@
-import { useEffect } from "react";
 
-export default function About({setLoading}) {
-
-    useEffect(() => {
-        setLoading(false);
-    },[])
+export default function About() {
 
     return (
         <>
