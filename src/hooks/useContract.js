@@ -2,6 +2,9 @@ import Web3 from "web3";
 import pixelCanvasABI from '../abi/PixelCanvas.json'
 import {useState} from "react";
 
+// Development network (Ganache) to be up and running or else application won't work
+// The following variables need to be adjusted to that of your local network
+
 let web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:7545')); // Ganache RPC Server
 const contractAddress = '0xfa175964B2EF5309c2C96DDC3c4f65A356524e16';
 const contract = new web3.eth.Contract(pixelCanvasABI.abi, contractAddress);
