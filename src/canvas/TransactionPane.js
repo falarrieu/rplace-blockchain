@@ -36,7 +36,7 @@ const Cancel = styled(IconButton)(
 );
 
 export default function TransactionPane({transactionContext}) {
-    const [colorPickerColor, setColorPickerColor] = useState({r: "254", g: "158", b: "1"});
+    const [colorPickerColor, setColorPickerColor] = useState({r: transactionContext.context.pixel.object.color[0], g: transactionContext.context.pixel.object.color[1], b: transactionContext.context.pixel.object.color[2]});
 
     const handleColorChange = (color) => {
         setColorPickerColor(color.rgb);
