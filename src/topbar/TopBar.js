@@ -4,6 +4,7 @@ import useTabs from "../hooks/useTabs";
 import MiniDrawer from "./MiniDrawer";
 import TopBarTabs from "./TopBarTabs";
 import Logo from "./Logo";
+import { Outlet} from "react-router-dom";
 
 
 export default function TopBar() {
@@ -15,6 +16,7 @@ export default function TopBar() {
     const theme = useTheme();
 
     return (
+        <>
             <MiniDrawer
                 open={expanded}
                 variant="permanent"
@@ -26,6 +28,7 @@ export default function TopBar() {
                 <Logo  expanded={expanded} />
                 <TopBarTabs expanded={expanded} tabsContext={tabsContext} />
             </MiniDrawer>
-        
+            <Outlet />
+        </>       
     );
 }
