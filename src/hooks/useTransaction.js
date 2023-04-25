@@ -17,7 +17,8 @@ export default function useTransaction(canvasContext, contractContext) {
         transactionPaneOpen,
         closeTransaction: () => setTransactionPaneOpen(false),
         openTransaction: (selectedPixel) => openTransaction(selectedPixel, context),
-        submitTransaction: (R, G, B) => submitTransaction(R, G, B, context)
+        submitTransaction: (R, G, B) => submitTransaction(R, G, B, context),
+        context,
     }
 }
 
