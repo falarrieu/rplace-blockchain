@@ -1,20 +1,23 @@
 import styled from "@emotion/styled";
-import {IconButton, Paper} from "@mui/material";
+import {IconButton} from "@mui/material";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
 import SendIcon from '@mui/icons-material/Send';
 import CancelIcon from '@mui/icons-material/Cancel';
+import {ChromePicker} from 'react-color';
 import {useState} from "react";
+import { render } from "@testing-library/react";
 
-const TransactionContainer = styled(Paper)(
+const TransactionContainer = styled(Card)(
     ({ theme, open }) => ({
         zIndex: 100,
-        width: '500px',
-        height: '500px',
+        width: '255px',
         position: 'absolute',
-        right: '0%',
+        variant: 'outlined',
+        right: '8px',
         bottom: '30%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
     }),
 );
 
@@ -22,9 +25,6 @@ const Submit = styled(IconButton)(
     ({ theme, open }) => ({
         width: '80px',
         height: '80px',
-        position: 'absolute',
-        right: '0%',
-        bottom: '0%',
     }),
 );
 
@@ -32,73 +32,35 @@ const Cancel = styled(IconButton)(
     ({ theme, open }) => ({
         width: '80px',
         height: '80px',
-        position: 'absolute',
-        left: '0%',
-        bottom: '0%',
-    }),
-);
-
-const FormGroup = styled("div")(
-    ({ theme, open }) => ({
-        width: '80%',
-        height: '50px',
-        position: 'absolute',
-        left: '0%',
-        bottom: '0%',
-    }),
-);
-
-const Form = styled("form")(
-    ({ theme, open }) => ({
-        display: 'flex',
-        flexDirection: 'row',
-        width: '80%',
-        height: '50px',
-        position: 'absolute',
-        bottom: '50%',
-    }),
-);
-
-const Input = styled("input")(
-    ({ theme, open }) => ({
-        width: "33%"
     }),
 );
 
 export default function TransactionPane({transactionContext}) {
+    const [colorPickerColor, setColorPickerColor] = useState({r: transactionContext.context.pixel.object.color[0], g: transactionContext.context.pixel.object.color[1], b: transactionContext.context.pixel.object.color[2]});
 
-    const [R, setR] = useState(0);
-    const [G, setG] = useState(0);
-    const [B, setB] = useState(0);
-
-    const handleRChange = (event) => {
-        const value = Math.max(0, Math.min(255, event.target.value)); // Ensure value is between 0 and 255
-        setR(value);
+    const handleColorChange = (color) => {
+        setColorPickerColor(color.rgb);
     };
 
-    const handleGChange = (event) => {
-        const value = Math.max(0, Math.min(255, event.target.value)); // Ensure value is between 0 and 255
-        setG(value);
-    };
-
-    const handleBChange = (event) => {
-        const value = Math.max(0, Math.min(255, event.target.value)); // Ensure value is between 0 and 255
-        setB(value);
-    };
+    var subheaderText = "x: " + transactionContext.context.pixel.object.index[0] + ", y: " + transactionContext.context.pixel.object.index[1];
 
     return (
         <TransactionContainer>
-            <Form>
-                <Input type="number" min="0" max="255" value={R} onChange={handleRChange}/>
-                <Input type="number" min="0" max="255" value={G} onChange={handleGChange}/>
-                <Input type="number" min="0" max="255" value={B} onChange={handleBChange}/>
-            </Form>
-            <Submit onClick={() => transactionContext.submitTransaction(R, G, B)}>
-                <SendIcon color='success'/>
-            </Submit>
-            <Cancel onClick={() => transactionContext.closeTransaction()} >
-                <CancelIcon color='error' />
-            </Cancel>
+            <CardHeader title="Select Pixel Color" subheader={subheaderText} style={{ textAlign: 'center' }}/>
+            <CardContent>
+                <ChromePicker
+                    color={colorPickerColor}
+                    onChange={handleColorChange}
+                />
+            </CardContent>
+            <CardActions>
+                <Cancel style={{ marginRight: 'auto' }} onClick={() => transactionContext.closeTransaction()} >
+                    <CancelIcon color='error' />
+                </Cancel>
+                <Submit style={{ marginLeft: 'auto' }} onClick={() => transactionContext.submitTransaction(colorPickerColor.r, colorPickerColor.g, colorPickerColor.b)}>
+                    <SendIcon color='success'/>
+                </Submit>
+            </CardActions>
         </TransactionContainer>
     );
 }
